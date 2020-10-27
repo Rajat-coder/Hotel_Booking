@@ -1,0 +1,304 @@
+{% extends user.is_authenticated|yesno:"userbase.html,base.html" %}
+{% load static %}
+{% block title %} About Us {% endblock %}
+
+
+{% block content %}
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+
+
+
+.hello1{
+    overflow: hidden;
+    z-index: 10;
+    position: relative;
+    margin: 150px auto;
+    height: 90px;
+    width: 300px;
+    background-color: #F17022;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
+    margin-top: 20px;
+
+}
+
+
+/*  BACKGROUND  */
+
+.Circle1{
+    z-index: 100;
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    right: -20px;
+    top: -30px;
+    border-radius: 50%;
+    background-color: rgba(253,184,19,1);
+    animation: enlarge;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.Circle2{
+    z-index: 80;
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    right: -50px;
+    top: -70px;
+    border-radius: 50%;
+    background-color: rgba(246,140,31,0.7);
+
+    animation: enlarge;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+}
+
+.Circle3{
+    z-index: 50;
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    right: -50px;
+    top: -100px;
+    border-radius: 50%;
+    background-color: rgba(241,125,45,0.7);
+
+    animation: enlarge;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+
+
+/*  CONTENT  */
+
+.sun{
+    z-index: 1000;
+    font-size: 15px !important;
+}
+
+.Condition{
+    z-index: 1000;
+    position: absolute;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    left: 20px;
+    top: 10px;
+    margin-top: 3px;
+}
+
+.Temp{
+    z-index: 1000;
+    position: absolute;
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    left: 20px;
+    bottom: 5px;
+    margin-bottom: 7px;
+}
+
+#F{
+    z-index: 1000;
+    font-family: "Roboto",sans-serif;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+
+.Time{
+    z-index: 1000;
+    position: absolute;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 200;
+    right: 20px;
+    top: 10px;
+}
+
+.locationIcon{
+    z-index: 1000;
+    font-size: 10px !important;
+}
+
+.Location{
+    z-index: 1000;
+    position: absolute;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 200;
+    right: 20px;
+    bottom: 15px;
+}
+
+@keyframes enlarge{
+    50%{
+        transform: scale(1.2);
+    }
+}
+  </style>
+
+<!-- Breadcrumb Section Begin -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="breadcrumb-text" style="margin-top:30px;">
+                        <h2>About Us</h2>
+                        <div class="bt-option">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>About Us</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    	<div class="hello1">
+                          <div class="background">
+                          <div class="Circle1"></div>
+                          <div class="Circle2"></div>
+                          <div class="Circle3"></div>
+                          <div class="hello">
+                            <h1 class="Condition"><i class="material-icons sun">wb_sunny</i> {{ temp3 }}</h1>
+                            <h1 class="Temp">{{ temp }}<span id="F">&#8451;</span></h1>
+                            <h1 class="Time">16:35</h1>
+                            <h1 class="Location"><i class="material-icons locationIcon">place</i> {{ temp2 }}</h1>
+                          </div>
+                            </div>
+
+		                </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    <!-- Breadcrumb Section End -->
+
+    <!-- About Us Page Section Begin -->
+    <section class="aboutus-page-section spad">
+        <div class="container">
+            <div class="about-page-text">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="ap-title">
+                            <h2>Welcome To Royal Continental Hotel </h2>
+                            <p>Built in 1910 during the Belle Epoque period, this hotel is located in the center of
+                                Paris, with easy access to the city’s tourist attractions. It offers tastefully
+                                decorated rooms.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 offset-lg-1">
+                        <ul class="ap-services">
+                            <li><i class="icon_check"></i> 20% Off On Accommodation.</li>
+                            <li><i class="icon_check"></i> Complimentary Daily Breakfast</li>
+                            <li><i class="icon_check"></i> 3 Pcs Laundry Per Day</li>
+                            <li><i class="icon_check"></i> Free Wifi.</li>
+                            <li><i class="icon_check"></i> Discount 20% On F&B</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="about-page-services">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="ap-service-item set-bg" data-setbg="{% static 'img/about/about-p1.jpg' %}">
+                            <div class="api-text">
+                                <h3>Restaurants Services</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="ap-service-item set-bg" data-setbg="{% static 'img/about/about-p2.jpg' %}">
+                            <div class="api-text">
+                                <h3>Travel & Camping</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="ap-service-item set-bg" data-setbg="{% static 'img/about/about-p3.jpg' %}">
+                            <div class="api-text">
+                                <h3>Event & Party</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Us Page Section End -->
+
+    <!-- Video Section Begin -->
+    <section class="video-section set-bg" data-setbg="{% static 'img/video-bg.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="video-text">
+                        <h2>Discover Our Hotel & Services.</h2>
+                        <p>It S Hurricane Season But We Are Visiting Hilton Head Island</p>
+                        <a href="https://www.youtube.com/watch?v=EzKkl64rRbM" class="play-btn video-popup"><img
+                                src="{% static 'img/play.png' %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Video Section End -->
+
+    <!-- Gallery Section Begin -->
+    <section class="gallery-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Our Gallery</span>
+                        <h2>Discover Our Work</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="gallery-item set-bg" data-setbg="{% static 'img/gallery/gallery-1.jpg' %}">
+                        <div class="gi-text">
+                            <h3>Standard Rooms</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="gallery-item set-bg" data-setbg="{% static 'img/gallery/gallery-3.jpg' %}">
+                                <div class="gi-text">
+                                    <h3>Delux Rooms</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="gallery-item set-bg" data-setbg="{% static 'img/gallery/gallery-4.jpg' %}">
+                                <div class="gi-text">
+                                    <h3>Premium Rooms</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="gallery-item large-item set-bg" data-setbg="{% static 'img/gallery/gallery-2.jpg' %}">
+                        <div class="gi-text">
+                            <h3>Famiy Suite</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gallery Section End -->
+
+
+
+
+
+
+{% endblock %}

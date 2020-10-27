@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %} Royal Continental Hotel {% endblock %}</title>
+    {% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="keywords" content="Grand Tour Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+	<!-- css files -->
+    <link href="{% static 'css/bootstrap1.css' %}" rel='stylesheet' type='text/css' /><!-- bootstrap css -->
+	<link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+    <link href="{% static 'css/style1.css' %}" rel='stylesheet' type='text/css' /><!-- custom css -->
+    <link href="{% static 'css/font-awesome.min1.css' %}" rel="stylesheet"><!-- fontawesome css -->
+	<!-- //css files -->
+
+	<link href="{% static 'css/css_slider1.css' %}" type="text/css" rel="stylesheet" media="all">
+
+	<!-- google fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<!-- //google fonts -->
+
+</head>
+<body>
+
+<!-- header -->
+<header>
+	<div class="container">
+		<!-- nav -->
+		<nav class="py-md-4 py-3 d-lg-flex">
+			<div id="logo">
+				<h1 class="mt-md-0 mt-2"> <a href="index.html"><span class="fa fa-map-signs"></span> Royal Continental Hotel </a></h1>
+			</div>
+			<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
+			<input type="checkbox" id="drop" />
+			<ul class="menu ml-auto mt-1">
+
+				{% if user.is_authenticated %}
+				<li><a href="{% url 'signout' %}">Sign Out</a></li>
+				<li><a href="{% url 'myaccount' %}">Settings</a></li>
+				{% else %}
+				<li class=""><a href="{% url 'signpage' %}">Sign Up</a></li>
+				<li class="booking"><a href="{% url 'loginpage' %}">Login</a></li>
+				{% endif %}
+			</ul>
+		</nav>
+		<!-- //nav -->
+	</div>
+</header>
+<!-- //header -->
+
+<!-- banner -->
+<section class="banner_w3lspvt" id="home">
+	<div class="csslider infinity" id="slider1">
+		<input type="radio" name="slides" checked="checked" id="slides_1" />
+		<input type="radio" name="slides" id="slides_2" />
+		<input type="radio" name="slides" id="slides_3" />
+		<input type="radio" name="slides" id="slides_4" />
+		<ul>
+			<li>
+				<div class="banner-top">
+					<div class="overlay">
+						<div class="container">
+							<div class="w3layouts-banner-info">
+								<h3 class="text-wh">Never let your memories be greater than your dreams.</h3>
+								<h4 class="text-wh">Royal Continental Hotel</h4>
+								<div class="buttons mt-4">
+
+									{% if user.is_authenticated %}
+									<a href="{% url 'index' %}" class="btn mr-2">Welcome {{ request.session.myusername }}</a>
+									{% else %}
+									<a href="{% url 'index' %}" class="btn mr-2">Login As Guest</a>
+									{% endif %}
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="banner-top1">
+					<div class="overlay">
+						<div class="container">
+							<div class="w3layouts-banner-info">
+								<h3 class="text-wh">It is better to travel than to arrive. Let's Be Adventurers.</h3>
+								<h4 class="text-wh">Royal Continental Hotel</h4>
+								<div class="buttons mt-4">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="banner-top2">
+					<div class="overlay">
+						<div class="container">
+							<div class="w3layouts-banner-info">
+								<h3 class="text-wh">Never let your memories be greater than your dreams.</h3>
+								<h4 class="text-wh">Royal Continental Hotel</h4>
+								<div class="buttons mt-4">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="banner-top3">
+					<div class="overlay1">
+						<div class="container">
+							<div class="w3layouts-banner-info">
+								<h3 class="text-wh">It is better to travel than to arrive. Let's Be Adventurers.</h3>
+								<h4 class="text-wh">Royal Continental Hotel</h4>
+								<div class="buttons mt-4">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<div class="arrows">
+			<label for="slides_1"></label>
+			<label for="slides_2"></label>
+			<label for="slides_3"></label>
+			<label for="slides_4"></label>
+		</div>
+	</div>
+</section>
+
+
+<!--footer -->
+<footer>
+<section class="footer footer_w3layouts_section_1its py-5">
+	<div class="container py-lg-4 py-3">
+		<div class="row footer-top">
+			<div class="col-lg-3 col-sm-6 footer-grid_section_1its_w3">
+				<div class="footer-title">
+					<h3>Address</h3>
+				</div>
+				<div class="footer-text">
+					<p>Location : P.O. Box 182166, Deira, Dubai United Arab Emirates</p>
+					<p>Phone : +971 4 203 5000, +971 4 203 5199</p>
+					<p>Email : <a href="mailto:info@example.com">info@royalcontinentalhotels.com</a></p>
+					<p>Fax : +12 534894364</p>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6 footer-grid_section mt-sm-0 mt-4">
+				<div class="footer-title">
+					<h3>About Us</h3>
+				</div>
+				<div class="footer-text">
+					<p>Royal Continental Hotel offers business travelers and holidaymakers a stylish and welcoming haven just minutes from Dubai International Airport. With a variety of rooms to suit all requirements and tastes, as well as a host of business and leisure facilities, dining outlets and amenities</p>
+				</div>
+				<ul class="social_section_1info">
+					<li class="mb-2 facebook"><a href="#"><span class="fa fa-facebook"></span></a></li>
+					<li class="mb-2 twitter"><a href="#"><span class="fa fa-twitter"></span></a></li>
+					<li class="google"><a href="#"><span class="fa fa-google-plus"></span></a></li>
+					<li class="linkedin"><a href="#"><span class="fa fa-linkedin"></span></a></li>
+				</ul>
+			</div>
+			<div class="col-lg-3 col-sm-6 mt-lg-0 mt-4 footer-grid_section_1its_w3">
+				<div class="footer-title">
+					<h3>Travel Places</h3>
+				</div>
+				<div class="row">
+					<ul class="col-6 links">
+						<li><a href="#choose" class="scroll">New Zealand </a></li>
+						<li><a href="#overview" class="scroll">Paris, France </a></li>
+						<li><a href="#pricing" class="scroll">Los Angles</a></li>
+						<li><a href="#faq" class="scroll"> Darlington</a></li>
+						<li><a href="#testimonials" class="scroll">Canada </a></li>
+						<li><a href="#contact" class="scroll"> South Africa </a></li>
+					</ul>
+					<ul class="col-6 links">
+						<li><a href="#">Spain </a></li>
+						<li><a href="#">Turkey </a></li>
+						<li><a href="#faq" class="scroll">Europe </a></li>
+						<li><a href="#">Italy </a></li>
+						<li><a href="#">Sweden </a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6 mt-lg-0 mt-4 footer-grid_section_1its_w3">
+				<div class="footer-title">
+					<h3>Newsletter</h3>
+				</div>
+				<div class="footer-text">
+					<p>By subscribing to our mailing list you will always get latest news and updates from us.</p>
+					<form action="#" method="post">
+						<input type="email" name="Email" placeholder="Enter your email..." required="">
+						<button class="btn1"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+						<div class="clearfix"> </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</footer>
+<!-- //footer -->
+
+<!-- copyright -->
+<div class="copyright py-3 text-center">
+	<p>© 2019 Royal Continental Hotel. All Rights Reserved | Design by <a href="http://handaiprassociates.com/" target="=_blank"> HANDA </a></p>
+</div>
+<!-- //copyright -->
+
+<!-- move top -->
+<div class="move-top text-right">
+	<a href="#home" class="move-top">
+		<span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
+	</a>
+</div>
+<!-- move top -->
+
+
+</body>
+</html>

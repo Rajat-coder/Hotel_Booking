@@ -1,0 +1,143 @@
+{% extends user.is_authenticated|yesno:"userbase.html,base.html" %}
+{% load static %}
+{% block title %}Booking Page{% endblock %}
+
+
+{% block content %}
+<style type="text/css">
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=reset] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+.ui-datepicker {
+width: 21em; /*what ever width you want*/
+}
+
+
+</style>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Booking</h2>
+                        <div class="bt-option">
+                            <a href="{% url 'roompage' %}">Room</a>
+                            <span>Booking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="content">
+			<!---contact--->
+			<div class="contact">
+
+
+					<div class="col-md-4 " style="margin-left:120px;">
+
+						<form action="#" method="post">
+							{% csrf_token %}
+							{{ form.as_p}}
+							<input type="submit" value="Submit " style="margin-left:170px;" ><br>
+							<input type="reset" value="Clear" style="margin-left:170px; >
+							{% if messages %}
+							<ul>
+								{% for message in messages %}
+									<li>{{ message }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+						</form>
+					</div>
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-5" style="background-color:lightyellow; margin-left:70px;">
+						<h3>Room Selected</h3>
+						<br>
+						<img src="{{ roomdetails.image.url }}" class="img-responsive img-rounded" width="450px">
+						<br>
+						<h3>ROOM : {{ roomdetails.catname }}</h3>
+						<br>
+						<H4>SERVICES : {{ roomdetails.roomoptions }}</H4>
+						<br>
+						<H4>Price : {{ roomdetails.price }}</H4>
+					</div>
+					<div class="clearfix"> </div>
+			</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script type="text/javascript">
+	$( function() {
+    $("#id_checkindate").datepicker({
+
+  	dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    minDate:  new Date(),
+    onSelect: function(){
+    		var date2 = $('#id_checkindate').datepicker('getDate', '+1d');
+			date2.setDate(date2.getDate()+1);
+			$('#id_checkoutdate').datepicker('option','minDate', date2);
+    }
+    });
+
+    $("#id_checkoutdate").datepicker({
+    dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+	minDate : +1,
+    });
+
+	  });
+
+
+
+</script>
+
+{% endblock %}

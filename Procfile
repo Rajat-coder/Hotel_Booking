@@ -1,0 +1,1 @@
+web: gunicorn gtb.wsgi --log-file -

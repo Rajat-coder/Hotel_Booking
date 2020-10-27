@@ -1,0 +1,185 @@
+{% extends user.is_authenticated|yesno:"userbase.html,base.html" %}
+{% load static %}
+{% block title %} Our Rooms {% endblock %}
+
+
+{% block content %}
+
+<style>
+
+	.slider-container {
+  position: relative;
+  perspective: 350px;
+  transform-style: preserve-3d;
+}
+
+.carousel-3d-item {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  outline: 1px solid transparent;
+}
+
+#carousel-3d-controller-2 ~ .carousel-3d-item:nth-of-type(1),
+#carousel-3d-controller-1 ~ .carousel-3d-item:nth-of-type(1),
+#carousel-3d-controller-2 ~ .carousel-3d-item:nth-of-type(2),
+#carousel-3d-controller-1 ~ .carousel-3d-item:nth-of-type(2),
+#carousel-3d-controller-2 ~ .carousel-3d-item:nth-of-type(3),
+#carousel-3d-controller-1 ~ .carousel-3d-item:nth-of-type(3),
+{
+  transition: all 1s cubic-bezier(.48, .16, .15, .98);
+}
+
+.carousel-3d-item:nth-of-type(2),
+#carousel-3d-controller-1:checked ~ .carousel-3d-item:nth-of-type(2),
+#carousel-3d-controller-2:checked ~ .carousel-3d-item:nth-of-type(3),
+#carousel-3d-controller-3:checked ~ .carousel-3d-item:nth-of-type(1) {
+  transform: translateX(-175px) translateZ(-130px);
+  opacity: .9;
+  transition: all 1s cubic-bezier(.48, .16, .15, .98);
+}
+
+.carousel-3d-item:nth-of-type(1),
+#carousel-3d-controller-1:checked ~ .carousel-3d-item:nth-of-type(1),
+#carousel-3d-controller-2:checked ~ .carousel-3d-item:nth-of-type(2),
+#carousel-3d-controller-3:checked ~ .carousel-3d-item:nth-of-type(3) {
+  transform: translateX(0) translateZ(0);
+  opacity: 1;
+  transition: all 1s cubic-bezier(.48, .16, .15, .98);
+}
+
+.carousel-3d-item:nth-of-type(3),
+#carousel-3d-controller-1:checked ~ .carousel-3d-item:nth-of-type(3),
+#carousel-3d-controller-2:checked ~ .carousel-3d-item:nth-of-type(1),
+#carousel-3d-controller-3:checked ~ .carousel-3d-item:nth-of-type(2) {
+  transform: translateX(175px) translateZ(-130px);
+  opacity: .9;
+  transition: all 1s cubic-bezier(.48, .16, .15, .98);
+}
+
+
+</style>
+
+<div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>ROOMS</h2>
+                        <div class="bt-option">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>Rooms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="content">
+			<!---contact--->
+			<div class="contact">
+				<div class="container">
+
+					<div class="row" >
+						{% for roomdetail in roomdetails %}
+
+						<div class="col-md-6" align="center" style="border: 1px solid grey; border-radius: 10px;">
+							<br>
+
+							<p class="badge badge-primary text-wrap" style="font-size:18px; width:220px; height:25px;"><strong>{{ roomdetail.categoryname | capfirst }}</strong></p>
+							{% if roomdetail.Image %}
+									<a href="{% url 'myroomdetails' roomdetail.id %}">
+									<img src="{{ roomdetail.Image.url }}" class="img-responsive img-rounded gray" >
+									</a>
+							{% endif %}
+
+							<br>
+							<h5>Room-Size : {{ roomdetail.roomsize}}</h5>
+							<br>
+							<h5><b>Person Allowed : {{ roomdetail.capcity}}</h5>
+							<br>
+							<h5>Beds : {{ roomdetail.beds}}</h5>
+							<br>
+							<h5>Bed-Type : {{ roomdetail.bedtype}}</h5>
+							<br>
+<!--							<h5>Services : {{ roomdetail.services | safe}}</h5>-->
+<!--							<br>-->
+							</div>
+							{% if forloop.counter|divisibleby:2 %}
+							</div>
+							<div class="row">
+							{% endif %}
+						{% endfor %}
+							</div>
+				</div>
+
+					<div class="clearfix"> </div>
+				</div>
+</div>
+<br>
+<br>
+<br>
+
+<div class="slider-container">
+  <figure id="carousel--3d">
+    <input type="radio" name="carousel-3d" id="carousel-3d-controller-1" />
+    <input type="radio" name="carousel-3d" id="carousel-3d-controller-2" />
+    <input type="radio" name="carousel-3d" id="carousel-3d-controller-3" />
+    <label for="carousel-3d-controller-1" class="carousel-3d-item">
+                  <div class="slide-img">
+                    <img src="{% static 'images/1.jpg' %}" alt="" width="600px" />
+                  </div>
+                  <div class="slide-content">
+
+                    <h6>Royal Continental Hotel</h6>
+                  </div>
+                </label>
+
+                <label for="carousel-3d-controller-2" class="carousel-3d-item">
+                  <div class="slide-img">
+                    <img src="{% static 'images/2.jpg' %}" alt="" width="600px" />
+                  </div>
+                  <div class="slide-content">
+
+                    <h6>Royal Continental Hotel</h6>
+                  </div>
+                </label>
+
+                <label for="carousel-3d-controller-3" class="carousel-3d-item">
+                  <div class="slide-img">
+                    <img src="{% static 'images/3.jpg' %}" alt="" width="600px" />
+                  </div>
+                  <div class="slide-content">
+
+                    <h6>Royal Continental Hotel</h6>
+                  </div>
+                </label>
+  </figure>
+</div>
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript">
+var delay = 1500;
+var sliderRadios = document.getElementsByName("carousel-3d");
+var index=0
+var imageCount = sliderRadios.length;
+
+setInterval(function(){
+  index++;
+  if(index>imageCount-1){
+    index=0;
+  }
+  sliderRadios[index].click();
+  console.log(sliderRadios[index].id);
+},delay);
+</script>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends user.is_authenticated|yesno:"userbase.html,base.html" %}
+{% load static %}
+{% block title %} Update Your Profile {% endblock %}
+
+
+{% block content %}
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=email], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=reset] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+		@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+
+
+#box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 150px;
+  color: white;
+  font-family: 'Raleway';
+  font-size: 2.5rem;
+  margin-left:500px;
+}
+.gradient-border {
+  --borderWidth: 3px;
+
+  position: relative;
+  border-radius: var(--borderWidth);
+}
+.gradient-border:after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  border-radius: calc(2 * var(--borderWidth));
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+
+@keyframes animatedgradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+.ui-datepicker {
+width: 21em; /*what ever width you want*/
+}
+</style>
+<div class="gradient-border" id="box">
+	<h2>Update Profile</h2>
+</div>
+<div class="content">
+			<div class="about-section">
+				<div class="container">
+
+					<div class="about-grids">
+						<div class="col-md-4 about-grid">
+
+							<form action="#" method="post">
+								  {% csrf_token %}
+							{{ user_form.as_p }}
+							{{ profile_form.as_p }} <br>
+							<input type="submit" value="Submit">
+							<input type="reset" value="Clear" > <br>
+							</form>
+							<br>
+
+							{% if messages %}
+							<ul>
+								{% for message in messages %}
+									<li>{{ message }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+						</div>
+						<div class="col-md-8 about-grid">
+							<div class="about-top">
+
+								<div class="clearfix"></div>
+							</div>
+
+
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+</div>
+
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script type="text/javascript">
+	$( function() {
+    $( "#id_birth_date" ).datepicker({
+
+  	dateFormat: 'yy-mm-dd',
+
+  	});
+  	});
+
+
+
+</script>
+	<!--//team-->
+{% endblock %}

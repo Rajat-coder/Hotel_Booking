@@ -1,0 +1,1743 @@
+{% extends user.is_authenticated|yesno:"userbase.html,base.html" %}
+{% load static %}
+{% block title %}Room Details{% endblock %}
+
+
+{% block content %}
+
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+
+
+#box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1200px;
+  height: 150px;
+  color: white;
+  font-family: 'Raleway';
+  font-size: 2.5rem;
+}
+.gradient-border {
+  --borderWidth: 3px;
+
+  position: relative;
+  border-radius: var(--borderWidth);
+}
+.gradient-border:after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  border-radius: calc(2 * var(--borderWidth));
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+
+@keyframes animatedgradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.a
+{
+background-color: #363D54;
+height:40px;
+}
+h4
+{
+display: inline-block;
+margin-top: 5px;
+margin-left: 15px;
+
+}
+
+
+		html {
+  font-size: 64%;
+}
+
+.ag-format-container {
+  width: 1142px;
+  margin: 0 auto;
+}
+
+.ag-accounts-slider-block {
+  padding: 60px 0;
+
+  background-size: cover;
+
+  overflow-x: hidden;
+}
+.ag-accounts-slider__table {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+
+  margin-top: 3.5rem;
+}
+.ag-accounts-caption_list {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+
+  width: 200px;
+  margin: 0 -200px 0 0;
+  padding: 0 0 0 1rem;
+
+  list-style-type: none;
+
+  color: #697d8c;
+
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-transition: color .5s linear;
+  -moz-transition: color .5s linear;
+  -o-transition: color .5s linear;
+  transition: color .5s linear;
+
+  position: relative;
+}
+.ag-accounts-caption_item {
+  line-height: 1.42857143;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  font-size: 1.4rem;
+
+  position: absolute;
+}
+.ag-accounts-caption_item:before {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 1200px;
+  background-color: #e6ebef;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ag-accounts-caption_item:first-child:before {
+  content: none;
+}
+.ag-accounts-caption_item__deposit {
+  top: 18.5rem;
+}
+.ag-accounts-caption_item__exec {
+  top: 22.5rem;
+}
+.ag-accounts-caption_item__spread {
+  top: 26.5rem;
+}
+.ag-accounts-caption_item__tools {
+  top: 30.5rem;
+}
+.ag-accounts-caption_item__bonuses {
+  top: 36.5rem;
+}
+.ag-accounts-caption_item__terminal {
+  padding-bottom: 5rem;
+
+  top: 40.5rem;
+}
+.ag-accounts-slider__slider {
+  position: relative;
+}
+.js-ag-accounts-slider__pagination {
+  margin-right: 1rem;
+  margin-bottom: 3rem;
+
+  position: absolute;
+  right: 1rem;
+  bottom: 100%;
+}
+.ag-accounts-slider__rule-next,
+.ag-accounts-slider__rule-prev {
+  display: inline-block;
+  padding: 1rem;
+
+  opacity: 0;
+
+  vertical-align: middle;
+  font-size: 0;
+
+  -webkit-transition: all .5s linear;
+  -moz-transition: all linear .5s;
+  -o-transition: all linear .5s;
+  transition: all .5s linear;
+}
+.ag-accounts-slider__rule-next {
+  position: absolute;
+}
+.js-ag-accounts-slider__bullets {
+  display: none;
+
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.ag-accounts-slider__bullet,
+.js-ag-accounts-slider__bullets.js-ag-accounts-slider-bullets__active {
+  display: inline-block;
+
+  vertical-align: middle;
+}
+.ag-accounts-slider__bullet {
+  height: 2.6rem;
+  line-height: 0;
+  width: 2.6rem;
+  background-color: rgba(0, 0, 0, 0);
+
+  opacity: .15;
+
+  cursor: pointer;
+
+  text-align: center;
+  font-style: normal;
+  color: #126cab;
+}
+.ag-accounts-slider__bullet:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 1px;
+  margin-right: -1px;
+
+  vertical-align: middle;
+}
+.ag-accounts-slider__bullet:after {
+  content: "\02022";
+  display: inline-block;
+
+  vertical-align: middle;
+  font-style: normal;
+  font-size: 4rem;
+}
+.ag-accounts-slider__bullet.js-ag-accounts-slider-bullets__active,
+.ag-accounts-slider__bullet:hover {
+  opacity: 1;
+
+  color: #126cab;
+}
+.ag-accounts-slider__wrapper {
+  margin: 0 -100px;
+  padding: 0 100px;
+}
+.ag-accounts-slider__scrollable {
+  height: 52rem;
+  width: 100%;
+  padding-left: 200px;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-transition: all .5s linear;
+  -moz-transition: all .5s linear;
+  -o-transition: all .5s linear;
+  transition: all .5s linear;
+
+  position: relative;
+}
+.ag-accounts-slider_list {
+  height: 100%;
+  margin: 0 0 0 -3rem;
+  padding: 0;
+
+  list-style-type: none;
+
+  font-size: 0;
+
+  position: relative;
+}
+.ag-accounts-slider__next,
+.ag-accounts-slider__prev {
+  opacity: 1;
+
+  font-size: 0;
+
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+
+  -webkit-transition: all .5s linear;
+  -moz-transition: all linear .5s;
+  -o-transition: all linear .5s;
+  transition: all .5s linear;
+}
+.ag-accounts-slider__next {
+  margin-right: 1rem;
+
+  right: 0;
+
+  -webkit-transform: translate(200%, -50%);
+  -moz-transform: translate(200%, -50%);
+  -ms-transform: translate(200%, -50%);
+  -o-transform: translate(200%, -50%);
+  transform: translate(200%, -50%);
+}
+.ag-accounts-slider__prev {
+  margin-left: 1rem;
+
+  left: 0;
+
+  -webkit-transform: translate(-200%, -50%);
+  -moz-transform: translate(-200%, -50%);
+  -ms-transform: translate(-200%, -50%);
+  -o-transform: translate(-200%, -50%);
+  transform: translate(-200%, -50%);
+}
+
+.ag-accounts-slider_item {
+  width: 36rem;
+  height: 52rem;
+  padding: 1rem 4rem 33.7rem;
+  border: none;
+  border-bottom: 3px solid rgba(0, 0, 0, .15);
+  background: #FFF;
+
+  opacity: .6;
+
+  cursor: pointer;
+
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  will-change: auto;
+
+  position: absolute;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+
+  -webkit-transition: opacity .9s ease-in-out, -webkit-transform .8s ease-in-out;
+  -moz-transition: opacity .9s ease-in-out, -moz-transform .8s ease-in-out;
+  -o-transition: opacity .9s ease-in-out, -o-transform .8s ease-in-out;
+  transition: opacity .9s ease-in-out, transform .8s ease-in-out, -webkit-transform .8s ease-in-out, -moz-transform .8s ease-in-out, -o-transform .8s ease-in-out;
+}
+.ag-accounts-slider_item:first-child:not(.js-ag-active) {
+  opacity: 0;
+}
+.ag-accounts-slider_item.js-ag-active {
+  opacity: 1;
+
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item {
+  opacity: .8;
+
+  z-index: 2;
+
+  -webkit-transform: translate3d(40rem, 0, 0);
+  -moz-transform: translate3d(40rem, 0, 0);
+  -ms-transform: translate3d(40rem, 0, 0);
+  -o-transform: translate3d(40rem, 0, 0);
+  transform: translate3d(40rem, 0, 0);
+
+  -webkit-transition-delay: .1s;
+  -moz-transition-delay: .1s;
+  -o-transition-delay: .1s;
+  transition-delay: .1s;
+}
+.ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item {
+  opacity: .6;
+
+  z-index: 1;
+
+  -webkit-transform: translate3d(80rem, 0, 0);
+  -moz-transform: translate3d(80rem, 0, 0);
+  -ms-transform: translate3d(80rem, 0, 0);
+  -o-transform: translate3d(80rem, 0, 0);
+  transform: translate3d(80rem, 0, 0);
+
+  -webkit-transition-delay: .2s;
+  -moz-transition-delay: .2s;
+  -o-transition-delay: .2s;
+  transition-delay: .2s;
+}
+.ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item:after {
+  content: "";
+  display: block;
+  width: 24rem;
+
+  pointer-events: none;
+
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(234, 238, 249, 0)), to(#eaeef9));
+  background-image: -o-linear-gradient(left, rgba(234, 238, 249, 0), #eaeef9 100%);
+  background-image: linear-gradient(90deg, rgba(234, 238, 249, 0), #eaeef9 100%);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -3px;
+
+  -webkit-transition: all .6s linear;
+  -moz-transition: all .6s linear;
+  -o-transition: all .6s linear;
+  transition: all .6s linear;
+
+}
+.ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item,
+.ag-accounts-slider_item.js-ag-naked ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item {
+  opacity: 0;
+
+  z-index: 0;
+
+  -webkit-transform: translate3d(120rem, 0, 0);
+  -moz-transform: translate3d(120rem, 0, 0);
+  -ms-transform: translate3d(120rem, 0, 0);
+  -o-transform: translate3d(120rem, 0, 0);
+  transform: translate3d(120rem, 0, 0);
+
+  -webkit-transition-delay: .3s;
+  -moz-transition-delay: .3s;
+  -o-transition-delay: .3s;
+  transition-delay: .3s;
+}
+.ag-accounts-slider_item.js-ag-naked {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+
+  opacity: .8;
+
+  -webkit-transition: opacity .3s linear, background-color 1s linear, border-color 1s linear, -webkit-transform .8s ease-in-out;
+  -moz-transition: opacity .3s linear, background-color 1s linear, border-color 1s linear, -moz-transform .8s ease-in-out;
+  -o-transition: opacity .3s linear, background-color 1s linear, border-color 1s linear, -o-transform .8s ease-in-out;
+  transition: opacity .3s linear, background-color 1s linear, border-color 1s linear, transform .8s ease-in-out, -webkit-transform .8s ease-in-out, -moz-transform .8s ease-in-out, -o-transform .8s ease-in-out;
+}
+.ag-accounts-slider_item.js-ag-hide-first {
+  opacity: 0;
+
+  -webkit-transition: opacity .2s linear;
+  -moz-transition: opacity .2s linear;
+  -o-transition: opacity .2s linear;
+  transition: opacity .2s linear;
+}
+.ag-accounts-slider_item.js-ag-prev-hidden {
+  opacity: 0;
+
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.ag-accounts-slider_item.fade-out {
+  opacity: 0;
+
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.ag-accounts-slider_header-item {
+  margin: 1rem 0;
+
+  white-space: nowrap;
+}
+.ag-accounts-slider_title-item {
+  display: inline;
+  line-height: 1.76666667;
+  margin-right: .7rem;
+
+  vertical-align: baseline;
+  font-weight: 400;
+  font-size: 3rem;
+}
+.ag-accounts-slider_title-item-v2 {
+  color: #7fba2f;
+}
+.ag-accounts-slider_sticker {
+  display: inline-block;
+
+  vertical-align: 5px;
+
+  position: relative;
+}
+.ag-accounts-slider_sticker:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .15);
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+}
+.ag-accounts-slider_sticker:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-image: -webkit-gradient(linear, left top, right top, from(#126cab), color-stop(#168ac9), to(#126cab));
+  background-image: -o-linear-gradient(left, #126cab, #168ac9, #126cab);
+  background-image: linear-gradient(90deg, #126cab, #168ac9, #126cab);
+
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.ag-accounts-slider_sticker-v2:after {
+  background-image: -webkit-gradient(linear, left top, right top, from(#7fba2f), color-stop(#98c838), to(#7fba2f));
+  background-image: -o-linear-gradient(left, #7fba2f, #98c838, #7fba2f);
+  background-image: linear-gradient(90deg, #7fba2f, #98c838, #7fba2f);
+}
+.ag-accounts-slider_text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: .3rem 1rem;
+  font-size: 14px;
+  line-height: 1.42857143;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.ag-accounts-slider_desc-item {
+  line-height: 1.42857143;
+
+  font-size: 1.4rem;
+  color: #697d8c;
+}
+.ag-accounts-details_list {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+.ag-accounts-details_item {
+  line-height: 1.42857143;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  font-size: 1.4rem;
+
+  position: absolute;
+  left: 40px;
+  right: 40px;
+}
+.ag-accounts-details_item dl {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+
+  white-space: nowrap;
+}
+.ag-accounts-details_item dl:after,
+.ag-accounts-details_item dl:before {
+  content: " ";
+  display: table;
+}
+.ag-accounts-details_item dl:after {
+  clear: both;
+}
+.ag-accounts-details_item dt {
+  float: left;
+  margin: 0 -100% 0 0;
+  padding: 0;
+
+  opacity: 0;
+
+  will-change: auto;
+
+  font-weight: 400;
+  color: #697d8c;
+
+  -webkit-transform: translate3d(-50%, 0, 0);
+  -moz-transform: translate3d(-50%, 0, 0);
+  -ms-transform: translate3d(-50%, 0, 0);
+  -o-transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-50%, 0, 0);
+
+  -webkit-transition: all .4s linear;
+  -moz-transition: all linear .4s;
+  -o-transition: all linear .4s;
+  transition: all .4s linear;
+}
+.ag-accounts-details_item dt:after {
+  content: ":";
+  margin-right: 3px;
+}
+.ag-accounts-details_item dd {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.ag-accounts-details_item__deposit {
+  top: 18.5rem;
+}
+.ag-accounts-details_item__exec {
+  top: 22.5rem;
+}
+.ag-accounts-details_item__spread {
+  top: 26.5rem;
+}
+.ag-accounts-details_item__tools {
+  top: 30.5rem;
+}
+.ag-accounts-details_item__bonuses {
+  top: 36.5rem;
+}
+.ag-accounts-details_item__terminals {
+  padding-bottom: 5rem;
+
+  top: 40.5rem;
+}
+.ag-account-terminals_list {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+.ag-account-terminals_item {
+  display: inline;
+}
+.ag-account-terminals_item:not(:last-child):after {
+  content: ",";
+  display: inline;
+  margin-right: 3px;
+}
+.ag-account-terminals_link {
+  margin-top: 4.2rem;
+
+  opacity: .6;
+
+  font-size: 1rem;
+
+  position: absolute;
+}
+.ag-account-terminals_link:nth-child(2) {
+  -webkit-transform: translateX(4em);
+  -moz-transform: translateX(4em);
+  -ms-transform: translateX(4em);
+  -o-transform: translateX(4em);
+  transform: translateX(4em);
+}
+.ag-account-terminals_link:nth-child(3) {
+  -webkit-transform: translateX(8em);
+  -moz-transform: translateX(8em);
+  -ms-transform: translateX(8em);
+  -o-transform: translateX(8em);
+  transform: translateX(8em);
+}
+.ag-account-terminals_item:first-child .ag-account-terminals_link {
+  left: 0;
+}
+.ag-account-terminals_item:nth-child(2) .ag-account-terminals_link {
+  left: 4em;
+}
+.ag-account-terminals_item:nth-child(3) .ag-account-terminals_link {
+  left: 8em;
+}
+.ag-account-terminals_item:nth-child(4) .ag-account-terminals_link {
+  left: 12em;
+}
+.ag-account-terminals_item:nth-child(5) .ag-account-terminals_link {
+  left: 16em;
+}
+.ag-account-terminals_item:nth-child(6) .ag-account-terminals_link {
+  left: 20em;
+}
+
+.ag-account-terminals_icons {
+  display: inline-block;
+  height: 3em;
+  width: 3em;
+  background-repeat: no-repeat;
+  background-position-y: 0;
+
+  pointer-events: none;
+
+  vertical-align: middle;
+  font-size: 1rem;
+}
+.ag-account-terminals_link:hover .ag-account-terminals_icons {
+  background-position-y: 100%
+}
+.ag-account-terminals_icon_web {
+  background-image: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/accounts-slider/images/web.svg);
+  background-position-x: 0;
+  background-size: 3em 200%;
+}
+.ag-account-terminals_icon_mt4-desktop {
+  background-image: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/accounts-slider/images/mt4-desktop.svg);
+  background-position-x: 0;
+  background-size: 3em 200%;
+}
+.ag-account-terminals_icon_mt5-desktop {
+  background-image: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/accounts-slider/images/mt5-desktop.svg);
+  background-position-x: 0;
+  background-size: 3em 200%;
+}
+.ag-account-terminals_icon_wt-web {
+  background-image: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/accounts-slider/images/wt-web.svg);
+  background-position-x: 0;
+  background-size: 3em 200%;
+}
+.ag-account-terminals_icon_apple {
+  background-image: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/accounts-slider/images/apple.svg);
+  background-position-x: 0;
+  background-size: 3em 200%;
+}
+.ag-account-terminals_icon_android {
+  background-image: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/accounts-slider/images/android.svg);
+  background-position-x: 0;
+  background-size: 3em 200%;
+}
+.ag-account-terminals_icon_ctrader-desktop {
+  background-image: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/accounts-slider/images/ctrader-desktop.svg);
+  background-position-x: 0;
+  background-size: 3em 200%;
+}
+.ag-account-terminals_icon_phone {;
+  background-image: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/accounts-slider/images/phone.png);
+}
+
+@media (max-width: 1460px) {
+  .ag-accounts-slider__prev {
+    margin-left: 0;
+
+    -webkit-transform: translate(-100%, -50%);
+    -moz-transform: translate(-100%, -50%);
+    -ms-transform: translate(-100%, -50%);
+    -o-transform: translate(-100%, -50%);
+    transform: translate(-100%, -50%);
+  }
+  .ag-accounts-slider__next {
+    margin-right: 0;
+
+    -webkit-transform: translate(100%, -50%);
+    -moz-transform: translate(100%, -50%);
+    -ms-transform: translate(100%, -50%);
+    -o-transform: translate(100%, -50%);
+    transform: translate(100%, -50%);
+  }
+}
+
+@media (max-width: 1370px) {
+  .ag-accounts-slider__next,
+  .ag-accounts-slider__prev {
+    opacity: 0;
+  }
+  .ag-accounts-slider__rule-next,
+  .ag-accounts-slider__rule-prev {
+    opacity: 1;
+    position: static;
+  }
+}
+
+@media (max-width: 1200px) {
+  .ag-accounts-slider_item {
+    width: 34rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  .ag-accounts-details_item {
+    left: 3rem;
+    right: 3rem;
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(37rem, 0, 0);
+    -moz-transform: translate3d(37rem, 0, 0);
+    -ms-transform: translate3d(37rem, 0, 0);
+    -o-transform: translate3d(37rem, 0, 0);
+    transform: translate3d(37rem, 0, 0);
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(74rem, 0, 0);
+    -moz-transform: translate3d(74rem, 0, 0);
+    -ms-transform: translate3d(74rem, 0, 0);
+    -o-transform: translate3d(74rem, 0, 0);
+    transform: translate3d(74rem, 0, 0);
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(111rem, 0, 0);
+    -moz-transform: translate3d(111rem, 0, 0);
+    -ms-transform: translate3d(111rem, 0, 0);
+    -o-transform: translate3d(111rem, 0, 0);
+    transform: translate3d(111rem, 0, 0);
+  }
+}
+
+@media (max-width: 992px) {
+  .ag-accounts-slider_item {
+    width: 32rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .ag-accounts-details_item {
+    left: 2rem;
+    right: 2rem;
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(34rem, 0, 0);
+    -moz-transform: translate3d(34rem, 0, 0);
+    -ms-transform: translate3d(34rem, 0, 0);
+    -o-transform: translate3d(34rem, 0, 0);
+    transform: translate3d(34rem, 0, 0);
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(68rem, 0, 0);
+    -moz-transform: translate3d(68rem, 0, 0);
+    -ms-transform: translate3d(68rem, 0, 0);
+    -o-transform: translate3d(68rem, 0, 0);
+    transform: translate3d(68rem, 0, 0);
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(102rem, 0, 0);
+    -moz-transform: translate3d(102rem, 0, 0);
+    -ms-transform: translate3d(102rem, 0, 0);
+    -o-transform: translate3d(102rem, 0, 0);
+    transform: translate3d(102rem, 0, 0);
+  }
+}
+
+@media (max-width: 680px) {
+  .ag-accounts-slider_item {
+    height: 43rem;
+    width: 28rem;
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(29rem, 0, 0);
+    -moz-transform: translate3d(29rem, 0, 0);
+    -ms-transform: translate3d(29rem, 0, 0);
+    -o-transform: translate3d(29rem, 0, 0);
+    transform: translate3d(29rem, 0, 0);
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(58rem, 0, 0);
+    -moz-transform: translate3d(58rem, 0, 0);
+    -ms-transform: translate3d(58rem, 0, 0);
+    -o-transform: translate3d(58rem, 0, 0);
+    transform: translate3d(58rem, 0, 0);
+  }
+  .ag-accounts-slider_item.js-ag-active ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item ~ .ag-accounts-slider_item {
+    -webkit-transform: translate3d(87rem, 0, 0);
+    -moz-transform: translate3d(87rem, 0, 0);
+    -ms-transform: translate3d(87rem, 0, 0);
+    -o-transform: translate3d(87rem, 0, 0);
+    transform: translate3d(87rem, 0, 0);
+  }
+  .ag-accounts-slider_header-item {
+    margin: 0;
+  }
+  .ag-accounts-slider_title-item {
+    line-height: 2.5;
+
+    font-size: 2rem;
+  }
+  .ag-accounts-slider_text {
+    font-size: 1.2rem;
+    line-height: 1.66666667;
+  }
+  .ag-accounts-slider_desc-item {
+    line-height: 1.66666667;
+
+    font-size: 1.2rem;
+  }
+  .ag-accounts-details_item {
+    line-height: 1.66666667;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+
+    font-size: 1.2rem;
+  }
+  .ag-accounts-details_item__deposit {
+    top: 17.5rem;
+  }
+  .ag-accounts-details_item__exec {
+    top: 20.5rem;
+  }
+  .ag-accounts-details_item__spread {
+    top: 23.5rem;
+  }
+  .ag-accounts-details_item__tools {
+    top: 26.5rem;
+  }
+  .ag-accounts-details_item__bonuses {
+    top: 31.5rem;
+  }
+  .ag-accounts-details_item__terminals {
+    top: 34.5rem;
+  }
+  .ag-account-terminals_link {
+    margin-top: 3.5rem;
+  }
+  .ag-account-terminals_item:first-child .ag-account-terminals_link {
+    left: 0;
+  }
+  .ag-account-terminals_item:nth-child(2) .ag-account-terminals_link {
+    left: 3.4em;
+  }
+  .ag-account-terminals_item:nth-child(3) .ag-account-terminals_link {
+    left: 6.8em;
+  }
+  .ag-account-terminals_item:nth-child(4) .ag-account-terminals_link {
+    left: 10.2em;
+  }
+  .ag-account-terminals_item:nth-child(5) .ag-account-terminals_link {
+    left: 13.6em;
+  }
+  .ag-account-terminals_item:nth-child(6) > .ag-account-terminals_link {
+    left: 17em;
+  }
+  .ag-accounts-slider_item.js-ag-naked .ag-accounts-details_item dt {
+    margin-right: 0;
+
+    opacity: 1;
+
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  .ag-accounts-slider__table {
+    margin-top: 5rem;
+  }
+  .ag-accounts-caption_list {
+    display: none;
+  }
+  .ag-accounts-caption_item {
+    line-height: 1.66666667;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+
+    font-size: 1.2rem;
+  }
+  .ag-accounts-caption_item__deposit {
+    top: 17.5rem;
+  }
+  .ag-accounts-caption_item__exec {
+    top: 20.5rem;
+  }
+  .ag-accounts-caption_item__spread {
+    top: 23.5rem;
+  }
+  .ag-accounts-caption_item__tools {
+    top: 26.5rem;
+  }
+  .ag-accounts-caption_item__bonuses {
+    top: 31.5rem;
+  }
+  .ag-accounts-caption_item__terminal {
+    padding-bottom: 5rem;
+
+    top: 34.5rem;
+  }
+  .js-ag-accounts-slider__pagination {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    margin: 0;
+
+    white-space: nowrap;
+    text-align: right;
+
+    left: 0;
+    right: 0;
+  }
+  .js-ag-accounts-slider__bullets {
+    display: inline-block;
+  }
+  .ag-accounts-slider__next,
+  .ag-accounts-slider__prev {
+    -webkit-transform: scale(.7);
+    -moz-transform: scale(.7);
+    -ms-transform: scale(.7);
+    -o-transform: scale(.7);
+    transform: scale(.7);
+  }
+  .ag-accounts-slider__scrollable {
+    height: 43rem;
+    padding-left: 0;
+  }
+  .ag-accounts-slider_list {
+    margin-left: -1rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ag-format-container {
+    width: 96%;
+  }
+
+}
+
+@media only screen and (max-width: 639px) {
+
+}
+
+@media only screen and (max-width: 479px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .ag-format-container {
+    width: 750px;
+  }
+
+}
+
+@media (min-width: 980px) and (max-width: 1161px) {
+  .ag-format-container {
+    width: 960px;
+  }
+
+}
+
+    @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+
+
+
+span.icon {
+  margin: 0 5px;
+  color: #D64541;
+}
+
+.mrng-60-top {
+  margin-top: 60px;
+}
+/* Global Button Styles */
+a.animated-button:link, a.animated-button:visited {
+  position: relative;
+  display: block;
+  margin: 30px auto 0;
+  padding: 14px 15px;
+  color: #fff;
+  font-size:220px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: .08em;
+  border-radius: 0;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+a.animated-button:link:after, a.animated-button:visited:after {
+  content: "";
+  position: absolute;
+  height: 0%;
+  left: 50%;
+  top: 50%;
+  width: 150%;
+  z-index: -1;
+  -webkit-transition: all 0.75s ease 0s;
+  -moz-transition: all 0.75s ease 0s;
+  -o-transition: all 0.75s ease 0s;
+  transition: all 0.75s ease 0s;
+}
+a.animated-button:link:hover, a.animated-button:visited:hover {
+  color: #FFF;
+  text-shadow: none;
+}
+a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
+  height: 450%;
+}
+a.animated-button:link, a.animated-button:visited {
+  position: relative;
+  display: block;
+  margin: 30px auto 0;
+  padding: 14px 15px;
+  color: #fff;
+  font-size:14px;
+  border-radius: 0;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: .08em;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+/* Victoria Buttons */
+
+a.animated-button.victoria-one {
+  border: 2px solid #D24D57;
+}
+a.animated-button.victoria-one:after {
+  background: #D24D57;
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+  transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+}
+a.animated-button.victoria-two {
+  border: 2px solid #D24D57;
+}
+a.animated-button.victoria-two:after {
+  background: #D24D57;
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+  transform: translateX(-50%) translateY(-50%) rotate(25deg);
+}
+
+/* Sandy Buttons */
+
+a.animated-button.sandy-one {
+  border: 2px solid #AEA8D3;
+  color: #FFF;
+}
+a.animated-button.sandy-one:after {
+  border: 3px solid #AEA8D3;
+  opacity: 0;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+
+}
+a.animated-button.sandy-one:hover:after {
+  height: 120% !important;
+  opacity: 1;
+  color: #FFF;
+}
+a.animated-button.sandy-two {
+  border: 2px solid #AEA8D3;
+  color: #FFF;
+}
+a.animated-button.sandy-two:after {
+  border: 3px solid #AEA8D3;
+  opacity: 0;
+  -moz-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+  -ms-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+  -webkit-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+  transform: translateY(-50%) translateX(-50%) rotate(90deg);
+}
+a.animated-button.sandy-two:hover:after {
+  height: 600% !important;
+  opacity: 1;
+  color: #FFF;
+}
+
+
+a.animated-button.gibson-one {
+  border: 2px solid #65b37a;
+  color: #FFF;
+}
+a.animated-button.gibson-one:after {
+  opacity: 0;
+  background-image: -webkit-linear-gradient( transparent 50%, rgba(101,179,122,0.2) 50%);
+  background-image: -moz-linear-gradient(transparent 50%, rgba(101,179,122,0.2) 50%);
+  background-size: 10px 10px;
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+  transform: translateX(-50%) translateY(-50%) rotate(25deg);
+}
+a.animated-button.gibson-one:hover:after {
+  height: 600% !important;
+  opacity: 1;
+  color: #FFF;
+}
+a.animated-button.gibson-two {
+  border: 2px solid #65b37a;
+  color: #FFF;
+}
+a.animated-button.gibson-two:after {
+  opacity: 0;
+  background-image: -webkit-linear-gradient( transparent 50%, rgba(101,179,122,0.2) 50%);
+  background-image: -moz-linear-gradient(transparent 50%, rgba(101,179,122,0.2) 50%);
+  background-size: 10px 10px;
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+  transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+}
+a.animated-button.gibson-two:hover:after {
+  height: 600% !important;
+  opacity: 1;
+  color: #FFF;
+}
+
+
+a.animated-button.thar-one {
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  border: 2px solid #F7CA18;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+a.animated-button.thar-one:hover {
+  color: #000 !important;
+  background-color: transparent;
+  text-shadow: none;
+}
+a.animated-button.thar-one:hover:before {
+  bottom: 0%;
+  top: auto;
+  height: 100%;
+}
+a.animated-button.thar-one:before {
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 0px;
+  width: 100%;
+  z-index: -1;
+  content: '';
+  color: #000 !important;
+  background: #F7CA18;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+a.animated-button.thar-two {
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  border: 2px solid #F7CA18;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+a.animated-button.thar-two:hover {
+  color: #000 !important;
+  background-color: transparent;
+  text-shadow: ntwo;
+}
+a.animated-button.thar-two:hover:before {
+  top: 0%;
+  bottom: auto;
+  height: 100%;
+}
+a.animated-button.thar-two:before {
+  display: block;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  height: 0px;
+  width: 100%;
+  z-index: -1;
+  content: '';
+  color: #000 !important;
+  background: #F7CA18;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+
+
+
+</style>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>ROOM DETAIL</h2>
+                        <div class="bt-option">
+                            <a href="{% url 'roompage' %}">Room</a>
+                            <span>Room Detail</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<br>
+
+
+				<div class="container">
+
+                    <div class="gradient-border" id="box">
+					<h2 style="color:white;">{{ roomcatdetails.roomcategoryid.categoryname }}</h2>
+                    </div>
+                    <br>
+
+					<div class="roomfeatures">
+
+
+                        {{ roomcatdetails.roomcategoryid.services | safe }}
+					</div>
+
+
+					<br>
+                    <div class="a">
+					<h4 style="color:white;">{{ roomcatdetails.roomcategoryid.categoryname }}'s Options available</h4><br>
+                    </div>
+                    <br>
+
+					{% for roomdetail in roomcategorydetails %}
+
+							<div class="row">
+								<div class="col-md-3">
+									<img src="{{ roomdetail.roomcategoryid.Image.url }}" class="img-responsive img-rounded" width="150px"><br>
+
+								</div>
+
+								<div class="col-md-6">
+									<h6>{{ roomdetail.roomoption }}</h6>
+								</div>
+								<div class="col-md-3">
+										<h6>Rs.{{ roomdetail.roomprice }}/-</h6>
+                                    <a  href="{% url 'booking' roomdetail.id %}" style="color: black;" class="btn btn-sm animated-button thar-one">Book Now</a>
+
+
+								</div>
+
+							</div>
+						{% endfor %}
+
+				</div>
+<br>
+<div class="breadcrumb-text">
+                        <h2>HOTEL RULES</h2>
+</div>
+
+
+
+<div class="ag-accounts-slider-block">
+  <div class="ag-format-container">
+    <div class="ag-accounts-slider__slider">
+      <div class="js-ag-accounts-slider__pagination">
+        <!--<span class="js-ag-accounts-slider__bullets">
+          <i class="ag-accounts-slider__bullet js-ag-accounts-slider-bullets__active"></i>
+          <i class="ag-accounts-slider__bullet"></i>
+          <i class="ag-accounts-slider__bullet"></i>
+          <i class="ag-accounts-slider__bullet"></i>
+          <i class="ag-accounts-slider__bullet"></i>
+          <i class="ag-accounts-slider__bullet"></i>
+        </span>-->
+        <span class="ag-accounts-slider__rules">
+          <a class="js-accounts-slider-prev ag-accounts-slider__rule-prev" href="javascrip:void(0)">
+            <svg height="28" stroke="#1378bf" viewBox="0 0 56 56" width="28" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="42 55 15 28 42 1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"></polyline>
+            </svg>
+          </a>
+          <a class="js-accounts-slider-next ag-accounts-slider__rule-next" href="javascrip:void(0)">
+            <svg height="28" stroke="#1378bf" viewBox="0 0 56 56" width="28" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="15 55 42 28 15 1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"></polyline>
+            </svg>
+          </a>
+        </span>
+      </div>
+      <div class="ag-accounts-slider__wrapper">
+        <div class="ag-accounts-slider__table">
+
+          <div class="js-accounts-slider_slider ag-accounts-slider__scrollable">
+            <ul class="js-accounts-slider_list ag-accounts-slider_list">
+              <li id="demo" class="js-accounts-slider_card ag-accounts-slider_item js-ag-active js-ag-naked">
+                <div class="ag-accounts-slider_header-item"><h4 class="ag-accounts-slider_title-item ag-accounts-slider_title-item-v2"></h4>
+                  <span class="ag-accounts-slider_sticker ag-accounts-slider_sticker-v2"><b class="ag-accounts-slider_text">Food Arrangment </b></span>
+                </div>
+                <div class="ag-accounts-slider_desc-item">
+                  <p><b>
+                    Indian, Chinese and Continental dishes are prepared by a professional chef
+                  </b>
+                  </p>
+                  <p><b>
+                  	The property has a cook, who can prepare local delicacies
+                  </b>
+                  </p>
+                  <p><b>
+                  	Guests can order food from local restaurants and get it delivered at the property
+                  </b>
+                  </p>
+                  <p><b>
+                  	Kitchen Amenities:Salt, Pepper & Seasoning, Dishes & Silverware
+                  </b>
+                  </p>
+                </div>
+                <ul class="ag-accounts-details_list">
+                  <li class="ag-accounts-details_item ag-accounts-details_item__deposit">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__exec">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__spread">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__tools">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__bonuses">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__terminals">
+
+                  </li>
+                </ul>
+              </li>
+              <li id="prime" class="js-accounts-slider_card ag-accounts-slider_item">
+                <div class="ag-accounts-slider_header-item"><h4 class="ag-accounts-slider_title-item ag-accounts-slider_title-item-v2"></h4>
+                  <span class="ag-accounts-slider_sticker ag-accounts-slider_sticker-v2"><b class="ag-accounts-slider_text">Safety and Hygiene</b></span>
+                </div>
+                <div class="ag-accounts-slider_desc-item">
+                  <p><b>
+                  Utensils, crockery and supplies are sanitized before entering the kitchen
+                </b></p>
+                <p><b>
+                	All rooms are disinfected using bleach or other disinfectant
+                </b></p>
+                <p><b>
+                	Guests with fever are not allowed
+                </b></p>
+                <p><b>
+                	Only those guests with safe status on Aarogya Setu app are allowed
+                </b></p>
+                </div>
+                <ul class="ag-accounts-details_list">
+                  <li class="ag-accounts-details_item ag-accounts-details_item__deposit">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__exec">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__spread">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__tools">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__bonuses">
+
+                  </li>
+
+                </ul>
+              </li>
+              <li id="ecn-pro" class="js-accounts-slider_card ag-accounts-slider_item">
+                <div class="ag-accounts-slider_header-item"><h4 class="ag-accounts-slider_title-item"></h4>
+                  <span class="ag-accounts-slider_sticker"><b class="ag-accounts-slider_text">Guest Profile</b></span>
+                </div>
+                <div class="ag-accounts-slider_desc-item">
+                  <p><b>
+                  Suitable for children
+                </b></p>
+                <p><b>
+                	Bachelors are not allowed
+                </b></p>
+                <p><b>
+                	Unmarried couples allowed
+                </b></p>
+                </div>
+                <ul class="ag-accounts-details_list">
+                  <li class="ag-accounts-details_item ag-accounts-details_item__deposit">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__exec">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__spread">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__tools">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__bonuses">
+
+                  </li>
+                  <li class="ag-accounts-details_item ag-accounts-details_item__terminals">
+
+                  </li>
+                </ul>
+              </li>
+              <li id="stocks" class="js-accounts-slider_card ag-accounts-slider_item">
+                <div class="ag-accounts-slider_header-item"><h4 class="ag-accounts-slider_title-item"></h4>
+                  <span class="ag-accounts-slider_sticker"><b class="ag-accounts-slider_text">Payment Related</b></span>
+                </div>
+                <div class="ag-accounts-slider_desc-item">
+                  <p><b>
+                    Refundable security deposit before check-in is mandatory
+                  </b></p>
+                  <p><b>
+                  	Credit/debit cards are not accepted
+                  </b></p>
+                </div>
+
+              </li>
+              <li id="pro-cent" class="js-accounts-slider_card ag-accounts-slider_item">
+                <div class="ag-accounts-slider_header-item"><h4 class="ag-accounts-slider_title-item ag-accounts-slider_title-item-v2"></h4>
+                  <span class="ag-accounts-slider_sticker ag-accounts-slider_sticker-v2"><b class="ag-accounts-slider_text">Space Related </b></span>
+                </div>
+                <div class="ag-accounts-slider_desc-item">
+                  <p><b>
+                    Guests wont have to climb stairs to reach the room
+                  </b></p>
+                  <p><b>
+                  	There are no restrictions on food for guests
+                  </b></p>
+                  <p><b>
+                  	Caretaker stays on the property
+                  </b></p>
+                  <p><b>
+                  	Common space is available exclusively for the guests
+                  </b></p>
+                  <p><b>
+                  	Kitchen access (without basic utensils)
+                  </b></p>
+                </div>
+
+              </li>
+              <li id="pro-standard" class="js-accounts-slider_card ag-accounts-slider_item">
+                <div class="ag-accounts-slider_header-item"><h4 class="ag-accounts-slider_title-item"></h4>
+                  <span class="ag-accounts-slider_sticker"><b class="ag-accounts-slider_text">ID Proof Related</b></span>
+                </div>
+                <div class="ag-accounts-slider_desc-item">
+                  <p><b>
+                    Passport, Aadhar and Driving License are accepted as ID proof(s)
+                  </b></p>
+                  <p><b>
+                  	All Guests require Valid Photo ID, Families and Couples are welcome. Bachelors/Groups with LOCAL ID's are NOT allowed - No Parties/Exhibiting allowed. Final Right of Admission Reserved with Management-Refund can be denied in-case of any misconduct, Visitor Hours strictly till 11 PM
+                  </b></p>
+                  <p><b>
+                  	PAN Card, Office ID and Non-Govt ID are not accepted as ID proof(s)
+                  </b></p>
+                </div>
+
+              </li>
+            </ul>
+            <a class="js-accounts-slider-prev ag-accounts-slider__prev" href="javascrip:void(0)">
+              <svg height="56" stroke="#1378bf" width="56" xmlns="http://www.w3.org/2000/svg">
+                <polyline fill="none" points="42 55 15 28 42 1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"></polyline>
+              </svg>
+            </a><a class="js-accounts-slider-next ag-accounts-slider__next" href="javascrip:void(0)">
+            <svg height="56" stroke="#1378bf" width="56" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="15 55 42 28 15 1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"></polyline>
+            </svg>
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script>
+
+	(function ($) {
+  $(function () {
+
+
+      function agAccountsSlider (t) {
+        var e, n, a, r, s, i = $(window).width() <= 680,
+          o = "js-ag-hide-first",
+          c = "js-ag-naked",
+          u = "js-ag-active",
+          d = "fade-out",
+          f = "js-ag-accounts-slider-bullets__active",
+          l = "js-ag-prev-hidden",
+          h = false,
+          p = 0,
+          v = $(".js-accounts-slider_slider"),
+          g = $(".js-accounts-slider_list"),
+          C = $(".js-accounts-slider_card"),
+          m = C.first(),
+          x = $(".js-accounts-slider-prev"),
+          b = $(".js-accounts-slider-next"),
+          j = $(".js-accounts-slider-index"),
+          w = $(".js-accounts-slider-bullets").length ? $(".js-accounts-slider-bullets") : $('<span class="js-ag-accounts-slider__bullets"></span>').prependTo(".js-ag-accounts-slider__pagination"),
+          y = $('<i class="ag-accounts-slider__bullet"></i>'),
+          k = C.length,
+          T = 0,
+          _ = 0,
+          O = 2,
+          P = C.map((function (t, e) {
+            return $(e).attr("id")
+          })).toArray(),
+          D = 500,
+          M = {phone: 10, min: 20, med: 30, max: 40},
+          A = false,
+          q = false,
+          S = {x: null, y: null};
+
+        function L(t) {
+          Y(t, p);
+        }
+
+        function z(t) {
+          Y(t, p);
+        }
+
+        function X(t, e) {
+          var a = e - _;
+          Y(t, (J() + n) * (a < O ? a : O));
+        }
+
+        function Y(e, n) {
+          e.css({transform: "translate3d(" + (t ? -n : n) + "px, 0, 0)"});
+        }
+
+        function E(t) {
+          j.text(t + 1 + " / " + k);
+        }
+
+        function I(t, e) {
+          var n = setTimeout((function () {
+            clearTimeout(n), n = void 0, t();
+          }), e);
+        }
+
+        function W(t, n, a) {
+          e.removeClass(f), e.eq(t).addClass(f), E(t), function (t, e) {
+            var n = $(".js-accounts-slider_card"), a = 0;
+            _ = n.map((function (t, e) {
+              return $(e).attr("id")
+            })).toArray().indexOf(t), $(".js-accounts-slider_card." + u).addClass(o), n.each((function (t, n) {
+              var r = $(n);
+              r.hasClass(u) && r.addClass(o).removeClass(u), t < _ ? (L(r), r.addClass(l), I((function () {
+                  r.removeClass(o + " " + u + " " + l + " " + c), t < _ - 1 ? (r.addClass(d), r.detach().appendTo(g), X(r, k + t), I((function () {
+                      r.removeClass(d), (a += 1) === k - 1 && (h = false)
+                    }), 1)) : (a += 1) === k - 1 && (h = false)
+                }), D)) : t === _ ? (i ? e ? r.addClass(u + " " + c) : (r.addClass(c), I((function () {
+                        r.addClass(u)
+                      }), 400)) : r.addClass(u + " " + c), z(r), I((function () {
+                    (a += 1) === k - 1 && (h = false)
+                  }), D)) : (r.removeClass(o + " " + u + " " + l + " " + c), X(r, t), I((function () {
+                    t === _ + (k - 1) && (r.detach().prependTo(g), L(r)), (a += 1) === k - 1 && (h = false)
+                  }), D))
+            }))
+          }(n, a);
+        }
+
+        function J() {
+          return m.outerWidth();
+        }
+
+        function N(e) {
+          if (!e.changedTouches.item(a) || !A)return true;
+          A = false, 0 !== s && (s < 0 ? t ? b.trigger("click") : x.trigger("click") : t ? x.trigger("click") : b.trigger("click"));
+        }
+
+        function B() {
+          var t = $(window).width();
+          n = t < 680 ? M.phone : t > 680 && t < 992 ? M.min : t > 1000 && t < 1200 ? M.med : M.max;
+        }
+
+        B(), E(T), C.each((function (t, e) {
+          var n = $(e);
+          0 === t ? (_ = t, Y(n, 0), n.addClass(u + " " + c)) : t === k - 1 ? (n.detach().prependTo(g), L(n)) : X(n, t);
+          var a = y.clone();
+          a.data("card", n.attr("id")), 0 === t && a.addClass(f), a.appendTo(w)
+        })), (e = $(".ag-accounts-slider__bullet")).on("click", (function (t) {
+          if (t.preventDefault(), t.stopPropagation(), h)return false;
+          if ($(this).hasClass(f))return h = false, false;
+          var e = $(this).data("card"), n = T, a = true;
+          T = P.indexOf(e), 0 === n && T === k - 1 ? a = true : 0 === T ? a = false : T > n ? a = true : T < n && n - T == 1 && (a = false);
+          W(T, e, a);
+        })), C.on("click", (function (t) {
+          if ("a" !== t.target.tagName.toLowerCase()) {
+            if (t.preventDefault(), t.stopPropagation(), h)return false;
+            if (h = true, $(this).hasClass(u))return h = false, false;
+            var e = $(this).attr("id");
+            W(T = P.indexOf(e), e, true);
+          }
+        })), x.on("click", (function (t) {
+          if (t.preventDefault(), t.stopPropagation(), h)return false;
+          var e;
+          h = true, e = 0 === T ? k - 1 : T - 1;
+          var n = P[T = e];
+          W(T, n, false);
+        })), b.on("click", (function (t) {
+          if (t.preventDefault(), t.stopPropagation(), h)return false;
+          var e;
+          h = true, e = T === k - 1 ? 0 : T + 1;
+          var n = P[T = e];
+          W(T, n, true);
+        })), v.on("touchstart", (function (t) {
+          if (1 !== t.touches.length || A)return true;
+          A = true, q = true, s = 0, a = t.changedTouches[0], r = a.identifier, S.x = a.pageX, S.y = a.pageY
+        })), v.on("touchmove", (function (t) {
+          if (!A && !q)return true;
+          var e = function (t) {
+            var e = function (t) {
+              for (var e, n = t.changedTouches, a = 0, s = n.length; a < s; a++) {
+                var i = n[a];
+                if (i.identifier === r) {
+                  e = i;
+                  break;
+                }
+              }
+              return e;
+            }(t);
+            return e ? {x: e.pageX, y: e.pageY, touch: e} : null;
+          }(t);
+          if (q) {
+            if (!t.changedTouches.item(a))return true;
+            Math.abs(S.x - e.x) >= Math.abs(S.y - e.y) ? (t.preventDefault(), A = true) : A = false, q = false;
+          }
+          if (A) {
+            if (!t.changedTouches.item(a))return true;
+            s = S.x - e.x;
+          }
+        })), v.on("touchcancel", N), v.on("touchend", N), $(window).on("resize", (function (t) {
+          var n, a;
+          i = $(window).width() <= 680, B(),
+            n = $(".js-accounts-slider_card"),
+            a = e.filter("." + f).data("card"),
+            _ = n.map((function (t, e) {
+              return $(e).attr("id")
+            })).toArray().indexOf(a), n.each((function (t, e) {
+            var n = $(e);
+            t < _ ? L(n) : t === _ ? z(n) : X(n, t);
+          }))
+        }));
+      }
+
+    agAccountsSlider();
+
+  });
+})(jQuery);
+
+
+</script>
+
+
+
+{% endblock %}

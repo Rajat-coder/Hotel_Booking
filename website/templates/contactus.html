@@ -1,0 +1,316 @@
+{% extends user.is_authenticated|yesno:"userbase.html,base.html" %}
+{% load static %}
+{% block title %} Contact Us {% endblock %}
+
+
+{% block content %}
+<style>
+.contact
+{
+background-color:black;
+}
+
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=reset] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.social-media-list {
+  position: relative;
+  font-size: 2.3rem;
+  text-align: center;
+  width: 100%;
+}
+
+.social-media-list li a {
+  color: #fff;
+}
+
+.social-media-list li {
+  position: relative;
+  top: 0;
+  left: -20px;
+  display: inline-block;
+  height: 70px;
+  width: 70px;
+  margin: 10px auto;
+  line-height: 70px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: rgb(27,27,27);
+  cursor: pointer;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.social-media-list li:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 0 1px #fff;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.social-media-list li:hover {
+  background-color: #fff;
+}
+
+.social-media-list li:hover:after {
+  opacity: 1;
+  -webkit-transform: scale(1.12);
+          transform: scale(1.12);
+  -webkit-transition-timing-function: cubic-bezier(0.37,0.74,0.15,1.65);
+          transition-timing-function: cubic-bezier(0.37,0.74,0.15,1.65);
+}
+
+.social-media-list li:hover a {
+  color: #111;
+}
+
+.direct-contact-container {
+  max-width: 400px;
+  float: right;
+  margin-top: 5px;
+}
+
+/* Location, Phone, Email Section */
+.contact-list {
+  list-style-type: none;
+  margin-left: -30px;
+  padding-right: 20px;
+}
+
+.list-item {
+  line-height: 4;
+  color: #aaa;
+}
+
+.contact-text {
+  font: 300 18px 'Lato', sans-serif;
+  letter-spacing: 1.9px;
+  color: #bbb;
+}
+
+.place {
+  margin-left: 62px;
+}
+
+.phone {
+  margin-left: 56px;
+}
+
+.gmail {
+  margin-left: 53px;
+}
+
+.contact-text a {
+  color: #bbb;
+  text-decoration: none;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+}
+
+.contact-text a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.copyright {
+  font: 200 14px 'Oswald', sans-serif;
+  color: #555;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+hr {
+  border-color: rgba(255,255,255,.8); ;
+}
+
+.responsive-map{
+overflow: hidden;
+padding-bottom:56.25%;
+position:relative;
+height:0;
+}
+.responsive-map iframe{
+left:0;
+top:0;
+height:100%;
+width:100%;
+position:absolute;
+}
+
+.responsive-map{
+overflow: hidden;
+padding-bottom:56.25%;
+position:relative;
+height:0;
+}
+.responsive-map iframe{
+left:0;
+top:0;
+height:80%;
+width:80%;
+position:absolute;
+}
+</style>
+
+  <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>FEED-BACK</h2>
+                        <div class="bt-option">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>Feedback</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div class="content">
+			<!---contact--->
+			<div class="contact">
+
+
+					<div class="col-md-4  " style="margin-left:200px; text-align:center;">
+						<br>
+						<form action="#" method="post">
+							{% csrf_token %}
+							{{ form.as_p}}
+							<input type="submit" value="Submit" >
+							<input type="reset" value="Clear" >
+							{% if status == 1 %}
+								 <div class="alert alert-success" style="margin-top:20px">
+								 Mail has been sent successfully
+								 </div>
+								 {% elif status == 0 %}
+								 <div class="alert alert-danger" style="margin-top:20px">
+								 Mail has not been sent. Try later or send mail directly to gtbcomputers@gmail.com
+								 </div>
+							{% endif %}
+						</form>
+
+					</div>
+					<div class="col-md-3">
+
+					</div>
+					<div class="col-md-5 ">
+						<br>
+						<div class="direct-contact-container">
+
+							<ul class="contact-list">
+							  <li class="list-item"><i class="fa fa-map-marker fa-2x"><span class="contact-text place">Port Saeed - Dubai - United Arab </span></i></li>
+
+							  <li class="list-item"><i class="fa fa-phone fa-2x"><span class="contact-text phone"><a href="tel:1-212-555-5555" title="Give me a call">+971 4 203 5000</a></span></i></li>
+
+							  <li class="list-item"><i class="fa fa-envelope fa-2x"><span class="contact-text gmail"><a href="mailto:#" title="Send me an email">royalcontinentalhotell@gmail.com</a></span></i></li>
+
+							</ul>
+
+							<hr>
+							<ul class="social-media-list">
+							  <li><a href="#" target="_blank" class="contact-icon">
+								<i class="fa fa-github" aria-hidden="true"></i></a>
+							  </li>
+							  <li><a href="#" target="_blank" class="contact-icon">
+								<i class="fa fa-twitter" aria-hidden="true"></i></a>
+							  </li>
+							  <li><a href="#" target="_blank" class="contact-icon">
+								<i class="fa fa-instagram" aria-hidden="true"></i></a>
+							  </li>
+							  <li><a href="#" target="_blank" class="contact-icon">
+								<i class="fa fa-facebook" aria-hidden="true"></i></a>
+							  </li>
+							</ul>
+							<hr>
+
+							<div class="copyright">&copy; ALL OF THE RIGHTS RESERVED TO <!--YOUR SITE NAME--></div>
+
+						  </div>
+
+					</div>
+
+
+
+
+
+					<div class="clearfix"> </div>
+
+
+
+			</div>
+
+</div>
+<br>
+<div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>DIRECTIONS</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+<br>
+<div class="responsive-map" style="margin-left:230px;">
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13629.739788916495!2d75.5754224!3d31.3469747!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1513e41e47a74c3e!2sS.%20HANDA%20%26%20CO.!5e0!3m2!1sen!2sin!4v1599378989792!5m2!1sen!2sin"
+		width="600" height="50" frameborder="0" style="border:2;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+</div>
+
+
+
+
+
+{% endblock %}

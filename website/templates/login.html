@@ -1,0 +1,186 @@
+{% extends user.is_authenticated|yesno:"userbase.html,base.html" %}
+{% load static %}
+{% block title %} Login Page {% endblock %}
+
+
+{% block content %}
+
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=password], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=reset] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+
+		@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+
+
+#box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1490px;
+  height: 150px;
+  color: white;
+  font-family: 'Raleway';
+  font-size: 2.5rem;
+}
+.gradient-border {
+  --borderWidth: 3px;
+
+  position: relative;
+  border-radius: var(--borderWidth);
+}
+.gradient-border:after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  border-radius: calc(2 * var(--borderWidth));
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+
+@keyframes animatedgradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+</style>
+
+<!-- Breadcrumb Section Begin -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Login</h2>
+                        <div class="bt-option">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>Login</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Breadcrumb Section End -->
+<br>
+<div class="content">
+			<!---contact--->
+			<div class="contact">
+					{% if loginmessage %}
+						{% if loginmessage == "done" %}
+						<script type="text/javascript"> alert('Password Changed Successfully. Login again'); </script>
+						{% endif %}
+					{% endif %}
+
+
+					<div class="col-md-9 ">
+						<div class="gradient-border" id="box" >
+						<h2>Login Form</h2>
+						</div>
+
+                        <br>
+
+						<div class="col-md-7" style="margin-left:450px;">
+						<form action="{% url 'loginpage' %}" method	="post" onsubmit="return submitUserForm();">
+							{% csrf_token %}
+							{{ form.as_p}}
+							<div class="g-recaptcha" data-sitekey="6Le9cs0ZAAAAANBSBtBrRRUQGTcfmwGv5WOQ5my5" data-callback="verifyCaptcha"></div>
+    						<div id="g-recaptcha-error"></div>
+							<input type="hidden" name="next" value="{{ request.GET.next}}"/>
+
+							<input type="submit" value="Submit" style="margin-left:190px;" >
+							<br>
+							<input type="reset" value="Clear" style="margin-left:190px;" >
+							<script src='https://www.google.com/recaptcha/api.js'></script>
+							{% if messages %}
+							<ul>
+								{% for message in messages %}
+									<li>{{ message }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+
+						</form>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+
+			</div>
+</div>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script>
+function submitUserForm() {
+    var response = grecaptcha.getResponse();
+    if(response.length == 0) {
+        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+        return false;
+    }
+    return true;
+}
+
+function verifyCaptcha() {
+    document.getElementById('g-recaptcha-error').innerHTML = '';
+}
+</script>
+
+
+
+
+{% endblock %}
