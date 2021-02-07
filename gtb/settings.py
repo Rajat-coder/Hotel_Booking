@@ -22,11 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'a1o)%kmvx(8npji-p26z@i3-a^qed(p9h-4*wz8thub4=r#k@&'
-GOOGLE_RECAPTCHA_SECRET_KEY = '6LfRUtwZAAAAADMZVtT8gvTOoflEfEP0g6d7GJb2'
+GOOGLE_RECAPTCHA_SECRET_KEY = '6Le9cs0ZAAAAADGEviSZR8uVWUF-4Y0o1yeuS_7-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
@@ -163,7 +162,7 @@ LOGIN_URL="loginpage"
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "royalcontinentalhotell@gmail.com"
-EMAIL_HOST_PASSWORD = "anjuhaanda123"
+EMAIL_HOST_PASSWORD = "******"
 EMAIL_PORT = "465"
 EMAIL_USE_SSL = True
 

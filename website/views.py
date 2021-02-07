@@ -19,24 +19,36 @@ from .forms import signupform, LoginForm, BookingForm, UserForm, ProfileForm, Co
 from .models import Roomcategory, Roomcategorydetails, Booking, register_table
 from .token_generator import account_activation_token
 
+def about(request):
+    url = "http://api.openweathermap.org/data/2.5/weather?q=Jalandhar&appid=d6bf2e65d36627e9c4da4ace08b789e7&units=metric"
+    json_data = requests.get(url).json()
+    temperature = json_data["main"]["temp"]
+    temperature2 = json_data["name"]
+    temperature3 = json_data["weather"][0]["main"]
+    tempdata = {"temp": temperature, "temp2": temperature2, "temp3": temperature3}
+
+    return render(request, "aboutus.html",tempdata)
+
+
+def showcontactus(request):
+    myform = ContactForm(request.POST or None)
+    if myform.is_valid():
+        data = request.POST
+        name = data.get("name", "0")
+        emailid = data.get("emailid", "0")
+        message = data.get("message", "0")
+        result = send_mail("Message from Website", "Name : " + name + "\nEmailid : " + emailid + "\nMessage : " + message,
+            "royalcontinentalhotell@gmail.com", ["royalcontinentalhotell@gmail.com"], fail_silently=False)
+        return render(request, "contactus.html", {"form": myform, "status": result})
+    else:
+        return render(request, "contactus.html", {"form": myform})
+
 
 def start(request):
 
     return render(request, "startbase.html")
 
-def index(request):
-    context = {}
-    check = register_table.objects.filter(user__id=request.user.id)
-    if len(check) > 0:
-        data = register_table.objects.get(user__id=request.user.id)
-        context["data"] = data
 
-        if "image" in request.FILES:
-            img = request.FILES["image"]
-            data.profile_pic = img
-            data.save()
-
-    return render(request, "index.html",context)
 
 def final(request):
 
@@ -137,6 +149,21 @@ def mylogin(request):
             return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "login.html", {"form": formobj})
+
+def index(request):
+    context = {}
+    check = register_table.objects.filter(user__id=request.user.id)
+    if len(check) > 0:
+        data = register_table.objects.get(user__id=request
+                                          .user.id)
+        context["data"] = data
+
+        if "image" in request.FILES:
+            img = request.FILES["image"]
+            data.profile_pic = img
+            data.save()
+
+    return render(request, "index.html",context)
 
 
 def about(request):
