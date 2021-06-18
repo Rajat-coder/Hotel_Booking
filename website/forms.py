@@ -37,7 +37,7 @@ class signupform(forms.ModelForm):
         userobj.is_active = False
         if commit:
             userobj.save()
-            current_site = "bestjalandharhotel.herokuapp.com"
+            current_site = "127.0.0.1:8000"
             email_subject = 'Activate Your Account'
             message = render_to_string('activate_account.html', {
                 'user': userobj,
