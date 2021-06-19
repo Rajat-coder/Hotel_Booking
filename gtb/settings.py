@@ -163,7 +163,7 @@ LOGIN_URL="loginpage"
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "royalcontinentalhotell@gmail.com"
-EMAIL_HOST_PASSWORD = "anjuhaanda123"
+EMAIL_HOST_PASSWORD = "*************"
 EMAIL_PORT = "465"
 EMAIL_USE_SSL = True
 
