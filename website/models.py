@@ -1,6 +1,7 @@
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
+import pytz
 
 # Create your models here.
 from django.db.models.signals import post_save
@@ -54,6 +55,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
+    timezone = models.CharField(max_length=40, null=True, blank=True, choices=[(n,n) for n in pytz.all_timezones])
 
     def __str__(self):
         return str(self.user)

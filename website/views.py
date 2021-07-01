@@ -16,8 +16,14 @@ from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView
 
 from .forms import signupform, LoginForm, BookingForm, UserForm, ProfileForm, ContactForm
-from .models import Roomcategory, Roomcategorydetails, Booking, register_table
+from .models import Profile, Roomcategory, Roomcategorydetails, Booking, register_table
 from .token_generator import account_activation_token
+
+def check(request):
+    if request.user.is_authenticated:
+        return HttpResponse("You are authenitcated")
+    else:
+        return HttpResponse("You are not")
 
 def about(request):
     url = "http://api.openweathermap.org/data/2.5/weather?q=Jalandhar&appid=d6bf2e65d36627e9c4da4ace08b789e7&units=metric"

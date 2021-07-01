@@ -9,6 +9,7 @@ from .import views
 urlpatterns = [
 
     url('^$', views.start),
+    path('check/',views.check,name='check'),
     path('Best-Hotel-In-Dubai', views.index, name="index"),
     path('About_Royal_Continental_hotel', views.about, name="aboutpage"),
     path('Best_Room_In_Dubai', views.room, name="roompage"),
